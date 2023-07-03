@@ -29,7 +29,7 @@ To clone the ishape demo application in your locale repository, do
       $ cd Demo_Ishape_Zenoh_Interoperability_with_CycloneDDS   
 
 
-## Building Zenoh DDS iShapes
+## Building Zenoh iShapes
 
 From now one, we assume Zenoh and QT5 are installed
 
@@ -45,7 +45,7 @@ then you need to simply do the following from the iShape demo root directory:
       $ mkdir zenoh_demo_ishapes && cd zenoh_demo_ishapes  
       $ cmake --build . --config Release  
       
-     Note: please use '--config Debug' if you are using Cyclone DDS debug build to build this iShape application.
+     Note: please use '--config Debug' if you are using zenoh debug build to build this iShape application.
 
 ### Building on Windows with cmake
 To build the demo you need to have installed a QT5 development environment. The following QT5 environment variables has to be set in order to build and run ishapes:
@@ -61,7 +61,7 @@ then you need to simply do the following from the iShape demo root directory:
       $ mkdir zenoh_demo_ishapes && cd zenoh_demo_ishapes
       $ cmake --build . --config Release    
       
-Note: please use '--config Debug' if you are using Cyclone DDS debug build to build this iShape application.
+Note: please use '--config Debug' if you are using zenoh debug build to build this iShape application.
       
 
 # Running iShapes
@@ -70,15 +70,14 @@ The iShapes demo allows you to publish and subscribe instances of various shapes
 
 image-20201022104103958
 
-## Running Zenoh DDS iShapes
+## Running Zenoh iShapes
 ### Linux/MacOS:
 To run it  you  need to simply do the following:
 
       $ <build_directory>/zenoh_demo_ishapes &  
       $ <build_directory>/zenoh_demo_ishapes &  
 
-### Windows:
-cyclone_demo_ishapes is intalled in <cxx_install-location>/bin directory of Eclipse Cyclone installation. To run it  you need to simply do the following:  
+### Windows: 
       
       C:\> start <build_directory>/zenoh_demo_ishapes  
       C:\> start <build_directory>/zenoh_demo_ishapes  
