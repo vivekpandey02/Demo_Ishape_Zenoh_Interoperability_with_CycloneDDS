@@ -88,12 +88,17 @@ BouncingShapeDynamics::simulate()
     // Implementing Serialize logic here
     size_t sz = 0;
     get_serialized_size<ShapeType, xcdr_v2_stream, key_mode::not_key>(shape_, sz);
+    
+    /* in case Cyclone DDS Version < 0.10.x 
+        get_serialized_size<ShapeType, xcdr_v2_stream>(shape_,false, sz);
+    */
 
     void *buffer = malloc(sz+4);
-    if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, key_mode::not_key))
-    {
-        //std::cout<<"Serialized Successfully-----: "<<std::endl;
-    }
+    if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, key_mode::not_key)){}
+
+    /* in case Cyclone DDS Version < 0.10.x 
+        if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, false))
+    */
     	
 
     zenohc::PublisherPutOptions options;
