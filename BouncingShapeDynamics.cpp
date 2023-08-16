@@ -97,7 +97,7 @@ BouncingShapeDynamics::simulate()
     if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, key_mode::not_key)){}
 
     /* in case Cyclone DDS Version < 0.10.x 
-        if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, false))
+        if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, false)){}
     */
     	
 
