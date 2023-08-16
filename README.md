@@ -43,6 +43,10 @@ To build the iShapes demo you need to have installed a QT5 development environme
 then you need to simply do the following from the iShape demo root directory:
 
       $ mkdir zenoh_demo_ishapes && cd zenoh_demo_ishapes  
+      $ cmake .. 
+      $ cmake --build . --config Release  
+  
+ Note: please use '--config Debug' if you are using zenoh debug build to build this iShape application.
       $ cmake --build . --config Release  
       
      Note: please use '--config Debug' if you are using zenoh debug build to build this iShape application.
