@@ -120,6 +120,7 @@ ZenohShapeDynamics::ZenohShapeDynamics(int x0, int y0,
 }
 )
 );
+}
 
 void ZenohShapeDynamics::setKeyExpression(const std::string& keyExpression)
 {
