@@ -4,9 +4,7 @@
 #include "BouncingShapeDynamics.hpp"
 #include <math.h>
 #include <stdlib.h>
-// CycloneDDS CDR Deserializer
-#include <dds/cdr/dds_cdrstream.h>
-
+#include "org/eclipse/cyclonedds/topic/datatopic.hpp"
 
 #include <iostream>
 static const float PI = 3.1415926535F;
@@ -18,20 +16,10 @@ static const float PI = 3.1415926535F;
 #define roundf(a) ((a)>0?floor((a)+0.5):ceil((a)-0.5))
 #endif
 
-// CycloneDDS CDR Deserializer
-#include <dds/cdr/dds_cdrstream.h>
-
 
 
 
 namespace demo { namespace ishapes {
-
-const struct dds_cdrstream_allocator dds_cdrstream_default_allocator = {malloc, realloc, free};
-
-// CDR Xtypes header {0x00, 0x01} indicates it's Little Endian (CDR_LE representation)
-const uint8_t cdr_header[4] = {0x00, 0x01, 0x00, 0x00};
-
-const size_t alloc_size = 4096; // Abitrary size
 
 
 BouncingShapeDynamics::BouncingShapeDynamics(int x0, int y0,
@@ -97,16 +85,12 @@ BouncingShapeDynamics::simulate()
     shape_.y(pos_.y());
 
 
-    //std::string msg = "{ \"color\" : \""+shape_.color()+"\", \"x\" : "+std::to_string(shape_.x())+", \"y\" : "+std::to_string(shape_.y())+", \"shapesize\" : "+ std::to_string(shape_.shapesize())+" }";
-    //std::cout<<msg<<std::endl;
-
-//=============================================
     // Implementing Serialize logic here
     size_t sz = 0;
-    get_serialized_size<ShapeType, xcdr_v2_stream>(shape_, false, sz);
-    //std::cout<<"sz: "<<sz<<std::endl;
+    get_serialized_size<ShapeType, xcdr_v2_stream, key_mode::not_key>(shape_, sz);
+
     void *buffer = malloc(sz+4);
-    if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, false))
+    if(serialize_into<ShapeType, xcdr_v2_stream>(buffer, sz+4, shape_, key_mode::not_key))
     {
         //std::cout<<"Serialized Successfully-----: "<<std::endl;
     }
@@ -118,10 +102,8 @@ BouncingShapeDynamics::simulate()
     zenohc::BytesView payload(buffer,sz+4);
     
     pub_.put(payload);
-   // cout<<msg<<endl;
     free(buffer);
-//==============================================
-    //pub_.put(msg);
+
 
 
     plist_.erase(plist_.begin(), plist_.end());

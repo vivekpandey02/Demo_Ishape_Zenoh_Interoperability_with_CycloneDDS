@@ -32,7 +32,7 @@ include_directories(${CMAKE_BINARY_DIR})
 
 	add_executable(zenoh_demo_ishapes ${all_SRCS} ishape.qrc)
 
-	target_link_libraries(zenoh_demo_ishapes CycloneDDS-CXX::ddscxx IdlGenerated_lib Qt5::Widgets Qt5::Core Qt5::Gui zenohcxx::zenohc::lib jsoncpp)  
+	target_link_libraries(zenoh_demo_ishapes CycloneDDS-CXX::ddscxx IdlGenerated_lib Qt5::Widgets Qt5::Core Qt5::Gui zenohcxx::zenohc::lib)  
 
 	set_property(TARGET zenoh_demo_ishapes PROPERTY LANGUAGE CXX)
     set_property(TARGET zenoh_demo_ishapes PROPERTY CXX_STANDARD 17)

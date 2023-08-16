@@ -7,8 +7,6 @@
 #include <fstream>
 #include <thread>
 
-// including JsonCpp header file
-#include <jsoncpp/json/json.h>
 #include "config.hpp"
 #include <unistd.h>
 #include <stdlib.h>
@@ -78,15 +76,14 @@ ZenohShapeDynamics::ZenohShapeDynamics(int x0, int y0,
             
         }
 
-   subscriber_= std::get<zenoh::Subscriber>(session_->declare_subscriber(keyexpr1,[&] (const Sample *sample)// Capturing object by reference
+   subscriber_= std::get<zenoh::Subscriber>(session_->declare_subscriber(keyexpr1,[&] (const Sample& sample)// Capturing object by reference
     {  
         
-        if (sample) {
-   //##########################################################################
+       // if (sample) {
        
     // Implementing Deserialize logic here
-    	void* ptr= (void*)sample->get_payload().start;
-	    size_t sz = sample->get_payload().len;
+    	void* ptr= (void*)sample.get_payload().start;
+	    size_t sz = sample.get_payload().len;
         ShapeType sT;
         if(deserialize_sample_from_buffer<ShapeType>(ptr, sz, sT, SDK_DATA))
         {
@@ -119,29 +116,14 @@ ZenohShapeDynamics::ZenohShapeDynamics(int x0, int y0,
            }
         }
 
-    }
+    //}
 }
 )
 );
-//std::cout<<"subscrited Created"<<std::endl;
-//subscriber_  = std::make_shared<zenoh::Subscriber>(std::move(subscriber__));
-//subscriber = std::make_shared<zenoh::Subscriber>(std::move(subscriber_));
-}
 
 void ZenohShapeDynamics::setKeyExpression(const std::string& keyExpression)
 {
     keyexpr_ = keyExpression;
-}
-
-void ZenohShapeDynamics::setSubscriber(const std::string& keyExpression)
-{
-    //std::cout<<"Key Experssion: "<<keyExpression<<std::endl;
-    
-
-    //subscriberList.push_back(std::move(subscriber));
-     //subscriber_ = std::move(subscriber);
-    //subscriber_ = subscriber;
-    //return subscriber;
 }
 
 
@@ -169,6 +151,6 @@ ZenohShapeDynamics::~ZenohShapeDynamics()
 void
 ZenohShapeDynamics::simulate()
 {
-    sub_.pull();
+   // sub_.pull();
 }
 }}

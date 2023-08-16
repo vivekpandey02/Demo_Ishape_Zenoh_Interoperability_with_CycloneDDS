@@ -14,15 +14,15 @@
 #include "zenoh.hxx"
 #include <vector>
 #include<queue>
-#include <dds/cdr/dds_cdrstream.h>
+#include "org/eclipse/cyclonedds/topic/datatopic.hpp"
 
 
 namespace demo { namespace ishapes {
 #define CN 9
 
 
- typedef ::std::shared_ptr<Shape> SharedShape; // added
- typedef ::std::weak_ptr<Shape> WeakSharedShape; // added
+ typedef ::std::shared_ptr<Shape> SharedShape; 
+ typedef ::std::weak_ptr<Shape> WeakSharedShape; 
 
 /**
  * @addtogroup demos_iShapes
@@ -63,7 +63,7 @@ public:
     virtual ~ZenohShapeDynamics();
 
 public:
-     typedef ::std::shared_ptr<ZenohShapeDynamics> ref_type; // added
+     typedef ::std::shared_ptr<ZenohShapeDynamics> ref_type; 
 
 public:
 
@@ -77,7 +77,6 @@ public:
         session_ = std::move(session);
     }
 
-    void setSubscriber(const std::string& keyExpression);
     void setKeyExpression(const std::string& keyExpression);
 
 
